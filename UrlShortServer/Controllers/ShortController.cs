@@ -39,5 +39,11 @@ namespace UrlShortServer.Controllers
             return Ok(result);
         }
 
+        [HttpDelete]
+        public async Task Delete()
+        {
+            await ShortenerService.DeleteAllUrls();
+        }
+
     }
 }

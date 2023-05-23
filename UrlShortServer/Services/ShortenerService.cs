@@ -9,6 +9,8 @@ namespace UrlShortServer.Services
         Task<string?> GetLongUrl(string shortUrl);
 
         Task<ShortenerResponse> AddUrl(string longUrl);
+
+        Task DeleteAllUrls();
     }
 
     public class ShortenerService : IShortenerService
@@ -54,6 +56,11 @@ namespace UrlShortServer.Services
                 Code = ResponseCode.Success,
                 Message = shortUrl
             };
+        }
+
+        public Task DeleteAllUrls()
+        {
+            return db.Database.ExecuteSqlRawAsync("DELETE FROM UrlEntries");
         }
 
         public async Task<string?> GetLongUrl(string shortUrl)
