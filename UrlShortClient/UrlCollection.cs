@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UrlShortClient
+﻿namespace UrlShortClient
 {
     public class UrlCollection
     {
@@ -18,7 +12,7 @@ namespace UrlShortClient
         private object urlsLock = new();
         private object longUrlLock = new();
 
-        public UrlCollection(IReadOnlyList<string> longUrls) 
+        public UrlCollection(IReadOnlyList<string> longUrls)
         {
             LongUrls = longUrls;
         }
@@ -41,11 +35,28 @@ namespace UrlShortClient
             }
         }
 
+        public void DeleteUrl(string shortUrl)
+        {
+            lock (urlsLock)
+            {
+                for (var i = 0; i < Urls.Count; i++)
+                {
+                    var (_, shortUrlData) = Urls[i];
+
+                    if (shortUrlData == shortUrl)
+                    {
+                        Urls.RemoveAt(i);
+                        return;
+                    }
+                }
+            }
+        }
+
         public string GetRandomLongUrl()
         {
             lock (longUrlLock)
             {
-                // Lock is for ranodm and not the collection
+                // Lock is for random and not the collection
                 var index = LongUrlRandom.Next(0, LongUrls.Count);
                 return LongUrls[index];
             }

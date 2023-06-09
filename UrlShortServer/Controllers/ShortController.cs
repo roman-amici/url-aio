@@ -11,7 +11,7 @@ namespace UrlShortServer.Controllers
 
         IShortenerService ShortenerService { get; set; }
 
-        public ShortController(IShortenerService service ) 
+        public ShortController(IShortenerService service)
         {
             ShortenerService = service;
         }
@@ -28,6 +28,21 @@ namespace UrlShortServer.Controllers
             else
             {
                 return Redirect(longUrl);
+            }
+        }
+
+        [HttpDelete("{shortUrl}")]
+        public async Task<IActionResult> DeleteEntry(string shortUrl)
+        {
+            var result = await ShortenerService.DeleteUrl(shortUrl);
+
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
             }
         }
 

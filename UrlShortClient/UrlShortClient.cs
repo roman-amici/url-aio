@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using UrlShortServer.Transport;
 
 namespace UrlShortClient
 {
+    public enum UrlCommand
+    {
+        Read,
+        Write,
+        Delete
+    }
+
     internal class UrlShortClient
     {
 
         public string Address { get; set; }
-        public double ReadProbability { get; set; }
+
+        public Func<UrlCommand> Scenario { get; set; }
+
         public int ClientId { get; set; }
 
         public HttpClient HttpClient { get; set; }
@@ -27,15 +31,15 @@ namespace UrlShortClient
         public UrlCollection Urls { get; set; }
 
         public UrlShortClient(
-            int clientId, 
-            string address, 
-            double readProbability, 
+            int clientId,
+            string address,
+            Func<UrlCommand> scenario,
             Aggregator aggregator,
             UrlCollection urls)
         {
             ClientId = clientId;
             Address = address;
-            ReadProbability = readProbability;
+            Scenario = scenario;
             Aggregator = aggregator;
             Urls = urls;
 
@@ -58,21 +62,25 @@ namespace UrlShortClient
             }
         }
 
-        public async Task RunUntilCancelation(CancellationToken cancellationToken)
+        public async Task RunUntilCancellation(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    var random = new Random();
+                    var command = Scenario();
 
-                    if (random.NextDouble() < ReadProbability)
+                    switch (command)
                     {
-                        await Read();
-                    }
-                    else
-                    {
-                        await Write();
+                        case UrlCommand.Read:
+                            await Read();
+                            break;
+                        case UrlCommand.Write:
+                            await Write();
+                            break;
+                        case UrlCommand.Delete:
+                            await Delete();
+                            break;
                     }
 
                     await Task.Delay(50);
@@ -134,6 +142,27 @@ namespace UrlShortClient
             }
 
             return entry.Success;
+        }
+
+        public async Task<bool> Delete()
+        {
+            var (_, shortUrl) = Urls.GetRandomUrlPair();
+
+            Stopwatch.Start();
+            var response = await HttpClient.DeleteAsync($"{Address}/short/{shortUrl}");
+            Stopwatch.Stop();
+
+            var success = response.StatusCode == HttpStatusCode.OK;
+
+            var entry = new Entry(ClientId, Kind.Delete, Stopwatch.Elapsed, success);
+            Aggregator.AddEntry(entry);
+
+            if (success)
+            {
+                Urls.DeleteUrl(shortUrl);
+            }
+
+            return success;
         }
 
     }

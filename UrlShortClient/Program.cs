@@ -4,7 +4,6 @@
 using UrlShortClient;
 
 var numClients = 100;
-var readProbability = 0.95;
 
 var duration = TimeSpan.FromSeconds(60);
 var baseUrl = "https://localhost:7249";
@@ -18,9 +17,13 @@ var longUrls = new List<string>()
     "https://whatever.com"
 };
 
+var readMagnitude = 100.0;
+var writeMagnitude = 10.0;
+var deleteMagnitude = 1.0;
+
 Console.WriteLine("Beginning Test with:");
 Console.WriteLine($"NumClients: {numClients}");
-Console.WriteLine($"Read Probability: {readProbability}");
+Console.WriteLine($"Read-Write-Delete: {readMagnitude}-{writeMagnitude}-{deleteMagnitude}");
 Console.WriteLine($"Duration: {duration.TotalSeconds}");
 
 Console.WriteLine("");
@@ -33,27 +36,52 @@ var aggregator = new Aggregator();
 Console.WriteLine("Clearing database");
 await UrlShortClient.UrlShortClient.Reset(baseUrl);
 
-Console.WriteLine("Creating clients.");
-for(var i = 0; i < numClients; i++)
+var total = (readMagnitude + writeMagnitude + deleteMagnitude);
+var readProbability = readMagnitude / total;
+var writeProbability = writeMagnitude / total;
+var deleteProbability = deleteMagnitude / total;
+
+var scenario = () =>
 {
-    clients.Add(new UrlShortClient.UrlShortClient(i, baseUrl, readProbability, aggregator, urlCollection));
+    var random = new Random().NextDouble();
+
+    // Assume read > write > delete
+
+    if (random < deleteProbability)
+    {
+        return UrlCommand.Delete;
+    }
+    else if (random < deleteProbability + writeProbability)
+    {
+        return UrlCommand.Write;
+    }
+    else
+    {
+        return UrlCommand.Read;
+    }
+};
+
+Console.WriteLine("Creating clients.");
+for (var i = 0; i < numClients; i++)
+{
+    clients.Add(new UrlShortClient.UrlShortClient(i, baseUrl, scenario, aggregator, urlCollection));
 }
 
 Console.WriteLine("Adding initial entries");
 // Make sure there's some url's already in the database so we don't get 404's on the read
-for (var i = 0; i <  Math.Ceiling( (1 - readProbability) * numClients); i++)
+for (var i = 0; i < Math.Ceiling((1 - readProbability) * numClients); i++)
 {
     await clients[0].Write();
 }
 
-var cancelationTokens = new CancellationTokenSource();
+var cancellationTokens = new CancellationTokenSource();
 
 var clientTasks = new List<Task>();
 
 Console.WriteLine("Starting clients");
 foreach (var client in clients)
 {
-    clientTasks.Add(client.RunUntilCancelation(cancelationTokens.Token));
+    clientTasks.Add(client.RunUntilCancellation(cancellationTokens.Token));
     await Task.Delay(50);
 }
 
@@ -63,7 +91,7 @@ await Task.Delay(duration);
 
 Console.WriteLine("Test complete");
 
-cancelationTokens.Cancel();
+cancellationTokens.Cancel();
 
 await Task.WhenAll(clientTasks);
 
@@ -71,7 +99,7 @@ var reads = aggregator.SummarizeReadResponses();
 
 var failures = aggregator.ReadEntries.Where(x => !x.Success).ToList().Count;
 
-var avg = TimeSpan.FromMilliseconds( reads.Select(x => x.TotalMilliseconds).Average());
+var avg = TimeSpan.FromMilliseconds(reads.Select(x => x.TotalMilliseconds).Average());
 var readsPerSecond = reads.Count / duration.TotalSeconds;
 var p50 = Aggregator.Quantile(reads, 0.5);
 var p99 = Aggregator.Quantile(reads, 0.99);

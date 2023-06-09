@@ -12,7 +12,8 @@ namespace UrlShortClient
     public enum Kind
     {
         Read,
-        Write
+        Write,
+        Delete
     }
 
     public record Entry(int ClientId, Kind Kind, TimeSpan RequestDuration, bool Success)
@@ -60,9 +61,9 @@ namespace UrlShortClient
             return list;
         }
 
-        public static TimeSpan Quantile (IList<TimeSpan> times, double quantile)
+        public static TimeSpan Quantile(IList<TimeSpan> times, double quantile)
         {
-            var q = (int)Math.Floor(times.Count * quantile)-1;
+            var q = (int)Math.Floor(times.Count * quantile) - 1;
 
             if (q < 0)
             {
