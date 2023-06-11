@@ -1,0 +1,75 @@
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1710.2666666666667
+Failure Percentage 0
+Average 1.8217 ms
+p50 1.3666 ms
+p99 6.3324 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7195.866666666667
+Failure Percentage 0
+Average 12.1327 ms
+p50 5.3776 ms
+p99 27.5789 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 9980.266666666666
+Failure Percentage 0
+Average 32.3966 ms
+p50 23.699 ms
+p99 70.9806 ms
+
+5000 was impossible due to postgres timeouts
+
+----- Queries with low connection pooling ------
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1698.7666666666667
+Failure Percentage 0
+Average 2.2153 ms
+p50 1.3521 ms
+p99 7.3207 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 686.8333333333334
+Failure Percentage 0
+Average 599.9836 ms
+p50 834.7328 ms
+p99 1033.3199 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1741.4666666666667
+Failure Percentage 0
+Average 463.3879 ms
+p50 230.6723 ms
+p99 1543.3865 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 3847.1833333333334
+Failure Percentage 0
+Average 1144.9443 ms
+p50 968.0271 ms
+p99 9726.8418 ms
+
+NumClients: 10000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 2515.95
+Failure Percentage 0
+Average 3351.5127 ms
+p50 2927.6618 ms
+p99 12387.0638 ms

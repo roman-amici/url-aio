@@ -25,8 +25,15 @@ namespace UrlShortClient
         public ConcurrentStack<Entry> ReadEntries { get; set; } = new ConcurrentStack<Entry>();
         public ConcurrentStack<Entry> WriteEntries { get; set; } = new ConcurrentStack<Entry>();
 
+        public bool StartRecording { get; set; } = false;
+
         public void AddEntry(Entry entry)
         {
+            if (!StartRecording)
+            {
+                return;
+            }
+
             if (entry.Kind == Kind.Read)
             {
                 ReadEntries.Push(entry);

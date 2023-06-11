@@ -1,0 +1,35 @@
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1525.7
+Failure Percentage 0
+Average 1.9247 ms
+p50 0.9869 ms
+p99 15.409 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 4403.45
+Failure Percentage 0
+Average 141.1227 ms
+p50 131.1892 ms
+p99 337.5283 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 6387.583333333333
+Failure Percentage 0
+Average 604.7882 ms
+p50 598.6204 ms
+p99 962.3833 ms
+
+NumClients: 10000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 6167.083333333333
+Failure Percentage 0
+Average 1353.4234 ms
+p50 1308.8175 ms
+p99 2289.0462 ms

@@ -78,7 +78,8 @@ namespace UrlShortServer.Services
 
         public Task DeleteAllUrls()
         {
-            return db.Database.ExecuteSqlRawAsync("DELETE FROM UrlEntries");
+            //return db.Database.ExecuteSqlRawAsync("DELETE FROM UrlEntries");
+            return db.Database.ExecuteSqlRawAsync("TRUNCATE \"UrlEntries\" ");
         }
 
         public async Task<string?> GetLongUrl(string shortUrl)
