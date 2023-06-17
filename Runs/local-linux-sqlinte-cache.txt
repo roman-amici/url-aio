@@ -1,0 +1,47 @@
+---- Cache Size 10,000 ----
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1541
+Failure Percentage 0
+Average 0.7738 ms
+p50 0.5059 ms
+p99 5.8884 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 4266.666666666667
+Failure Percentage 0
+Average 42.1556 ms
+p50 33.2992 ms
+p99 140.723 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 6245.133333333333
+Failure Percentage 0
+Average 70.1016 ms
+p50 62.8664 ms
+p99 196.383 ms
+
+NumClients: 2500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 6564.666666666667
+Failure Percentage 0
+Average 255.0052 ms
+p50 256.7046 ms
+p99 420.8065 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 6290.5
+Failure Percentage 0
+Average 603.1776 ms
+p50 583.7644 ms
+p99 1120.0404 ms
+

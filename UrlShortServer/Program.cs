@@ -10,13 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddDbContext<UrlDbContext>(options =>
-// {
-//     options.UseNpgsql("Host=localhost; Database=urlshort; Username=db_user; Password=admin;Maximum Pool Size=1024");
-//     //options.UseSqlite("Data Source=url.db");
-// });
-//builder.Services.AddScoped<IShortenerService, ShortenerService>();
-builder.Services.AddSingleton<IShortenerService, InMemoryShortenerService>();
+builder.Services.AddDbContext<UrlDbContext>(options =>
+{
+    //options.UseNpgsql("Host=localhost; Database=urlshort; Username=db_user; Password=admin;Maximum Pool Size=1024");
+    options.UseSqlite("Data Source=url.db");
+});
+builder.Services.AddScoped<IShortenerService, ShortenerService>();
+//builder.Services.AddSingleton<IShortenerService, InMemoryShortenerService>();
+builder.Services.AddSingleton<ICacheService, InMemoryCacheService>();
 builder.Services.AddSingleton<IShortUrlService, RandomShortUrlService>();
 
 var app = builder.Build();

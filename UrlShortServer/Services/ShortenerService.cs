@@ -19,11 +19,13 @@ namespace UrlShortServer.Services
     {
         IShortUrlService shortUrlGenerator;
         UrlDbContext db;
+        ICacheService cache;
 
-        public ShortenerService(IShortUrlService shortGenerator, UrlDbContext db)
+        public ShortenerService(IShortUrlService shortGenerator, UrlDbContext db, ICacheService cache)
         {
             shortUrlGenerator = shortGenerator;
             this.db = db;
+            this.cache = cache;
         }
 
         public async Task<ShortenerResponse> AddUrl(string longUrl)
@@ -53,6 +55,8 @@ namespace UrlShortServer.Services
 
             await db.SaveChangesAsync();
 
+            await cache.AddUrl(shortUrl, longUrl);
+
             return new ShortenerResponse()
             {
                 Code = ResponseCode.Success,
@@ -73,18 +77,40 @@ namespace UrlShortServer.Services
 
             await db.SaveChangesAsync();
 
+            await cache.RemoveUrl(shortUrl);
+
             return true;
         }
 
-        public Task DeleteAllUrls()
+        public async Task DeleteAllUrls()
         {
-            //return db.Database.ExecuteSqlRawAsync("DELETE FROM UrlEntries");
-            return db.Database.ExecuteSqlRawAsync("TRUNCATE \"UrlEntries\" ");
+            if (db.Database.IsNpgsql())
+            {
+                await db.Database.ExecuteSqlRawAsync("TRUNCATE \"UrlEntries\" ");
+            }
+            else if (db.Database.IsSqlite())
+            {
+                await db.Database.ExecuteSqlRawAsync("DELETE FROM UrlEntries");
+            }
+
+            await cache.RemoveAllUrls();
         }
 
         public async Task<string?> GetLongUrl(string shortUrl)
         {
+            var longUrl = await cache.GetLongUrl(shortUrl);
+
+            if (!string.IsNullOrEmpty(longUrl))
+            {
+                return longUrl;
+            }
+
             var entry = await db.UrlEntries.FirstOrDefaultAsync(s => s.ShortUrl == shortUrl);
+
+            if (string.IsNullOrEmpty(longUrl) && !string.IsNullOrEmpty(entry?.LongUrl))
+            {
+                _ = Task.Run(() => cache.AddUrl(shortUrl, entry.LongUrl));
+            }
 
             return entry?.LongUrl;
         }

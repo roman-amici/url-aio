@@ -115,7 +115,7 @@ async Task RunSimulation(int numClients)
     Console.WriteLine("\n\n");
 }
 
-foreach (var numClients in new[] { 5000, 10000, 15000 })
+foreach (var numClients in new[] { 100, 500, 1000, 2500, 5000, 10000 })
 {
     await RunSimulation(numClients);
 }

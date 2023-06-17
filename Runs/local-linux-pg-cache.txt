@@ -1,0 +1,146 @@
+---- Cache size 1000 ----
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1710
+Failure Percentage 0
+Average 1.6042 ms
+p50 1.195 ms
+p99 5.9084 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7420.266666666666
+Failure Percentage 0
+Average 8.2144 ms
+p50 4.3266 ms
+p99 25.6292 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 9877.266666666666
+Failure Percentage 0
+Average 32.1702 ms
+p50 23.2219 ms
+p99 88.7282 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7640.166666666667
+Failure Percentage 0
+Average 459.9012 ms
+p50 458.1413 ms
+p99 710.1023 ms
+
+10000 was impossible due to postgres timeouts
+
+--- Cache size 10000 ----
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1728.0666666666666
+Failure Percentage 0
+Average 0.6061 ms
+p50 0.5082 ms
+p99 5.4653 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7803.45
+Failure Percentage 0
+Average 5.808 ms
+p50 3.002 ms
+p99 18.8924 ms
+
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 11617.1
+Failure Percentage 0
+Average 19.8089 ms
+p50 13.8699 ms
+p99 65.2431 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7592.366666666667
+Failure Percentage 0
+Average 472.1036 ms
+p50 467.6682 ms
+p99 780.3114 ms
+
+NumClients: 10000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 60.78333333333333
+Failure Percentage 0
+Average 17128.1656 ms
+p50 21469.6336 ms
+p99 47955.8037 ms
+
+
+--- Cache size 10000; Bags+Add ---
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1725.6166666666666
+Failure Percentage 0
+Average 0.608 ms
+p50 0.5016 ms
+p99 5.5337 ms
+
+Test complete
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7814.15
+Failure Percentage 0
+Average 5.6781 ms
+p50 3.0706 ms
+p99 20.5596 ms
+
+Test complete
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 11690.516666666666
+Failure Percentage 0
+Average 19.8648 ms
+p50 13.7557 ms
+p99 63.9073 ms
+
+Test complete
+NumClients: 2500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 10119.233333333334
+Failure Percentage 0
+Average 137.2925 ms
+p50 109.9635 ms
+p99 292.1556 ms
+
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7887.933333333333
+Failure Percentage 0
+Average 446.0579 ms
+p50 445.8762 ms
+p99 645.1638 ms
+
+NumClients: 10000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 5411.783333333334
+Failure Percentage 0
+Average 1576.7702 ms
+p50 1575.8285 ms
+p99 1949.0841 ms
