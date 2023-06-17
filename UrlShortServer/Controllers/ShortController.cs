@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UrlShortServer.Database;
 using UrlShortServer.Services;
 using UrlShortServer.Transport;
 
@@ -10,10 +11,12 @@ namespace UrlShortServer.Controllers
     {
 
         IShortenerService ShortenerService { get; set; }
+        UrlDbContext Db { get; set; }
 
-        public ShortController(IShortenerService service)
+        public ShortController(IShortenerService service, UrlDbContext db)
         {
             ShortenerService = service;
+            Db = db;
         }
 
         [HttpGet("{shortUrl}")]
@@ -58,6 +61,12 @@ namespace UrlShortServer.Controllers
         public async Task Delete()
         {
             await ShortenerService.DeleteAllUrls();
+        }
+
+        [HttpPost("table")]
+        public Task Post()
+        {
+            return Db.Database.EnsureCreatedAsync();
         }
 
     }
