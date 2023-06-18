@@ -2,12 +2,12 @@
 
 
 using UrlShortClient;
+using UrlShortServer.Transport;
 
-async Task RunSimulation(int numClients)
+async Task RunSimulation(int numClients, string baseUrl)
 {
 
     var duration = TimeSpan.FromSeconds(60);
-    var baseUrl = "https://localhost:7249";
 
     var longUrls = new List<string>()
     {
@@ -22,16 +22,35 @@ async Task RunSimulation(int numClients)
     var writeMagnitude = 10.0;
     var deleteMagnitude = 1.0;
 
-    Console.WriteLine("Beginning Test with:");
-    Console.WriteLine($"NumClients: {numClients}");
-
     var clients = new List<UrlShortClient.UrlShortClient>();
 
     var urlCollection = new UrlCollection(longUrls);
     var aggregator = new Aggregator();
 
-    Console.WriteLine("Clearing database");
-    await UrlShortClient.UrlShortClient.Reset(baseUrl);
+    ConfigurationResponse? config;
+    using (var client = new HttpClient())
+    {
+        Console.WriteLine("Getting database description");
+        config = await UrlShortClient.UrlShortClient.Describe(baseUrl, client);
+
+        if (config == null)
+        {
+            Console.WriteLine("Failed to retrieve configuration.");
+        }
+        else
+        {
+            Console.WriteLine("Configuration received:");
+            Console.WriteLine($"Database: {config?.DatabaseType}");
+            Console.WriteLine($"Cache: {config?.CacheType}");
+            Console.WriteLine($"ServerString : {config?.ServerString}");
+        }
+
+        Console.WriteLine("Creating database");
+        await UrlShortClient.UrlShortClient.EnsureCreated(baseUrl, client);
+
+        Console.WriteLine("Clearing database");
+        await UrlShortClient.UrlShortClient.Reset(baseUrl, client);
+    }
 
     var total = (readMagnitude + writeMagnitude + deleteMagnitude);
     var readProbability = readMagnitude / total;
@@ -57,6 +76,9 @@ async Task RunSimulation(int numClients)
             return UrlCommand.Read;
         }
     };
+
+    Console.WriteLine("Beginning Test with:");
+    Console.WriteLine($"NumClients: {numClients}");
 
     Console.WriteLine("Creating clients.");
     for (var i = 0; i < numClients; i++)
@@ -91,7 +113,7 @@ async Task RunSimulation(int numClients)
 
     cancellationTokens.Cancel();
 
-    await Task.WhenAll(clientTasks);
+    await Task.WhenAny(Task.WhenAll(clientTasks), Task.Delay(TimeSpan.FromSeconds(30)));
 
     var reads = aggregator.SummarizeReadResponses();
 
@@ -103,6 +125,10 @@ async Task RunSimulation(int numClients)
     var p99 = Aggregator.Quantile(reads, 0.99);
 
 
+    Console.WriteLine("\nResults:");
+    Console.WriteLine($"Database: {config?.DatabaseType}");
+    Console.WriteLine($"Cache: {config?.CacheType}");
+    Console.WriteLine($"ServerString : {config?.ServerString}");
     Console.WriteLine($"NumClients: {numClients}");
     Console.WriteLine($"Read-Write-Delete: {readMagnitude}-{writeMagnitude}-{deleteMagnitude}");
     Console.WriteLine($"Duration: {duration.TotalSeconds}");
@@ -115,9 +141,18 @@ async Task RunSimulation(int numClients)
     Console.WriteLine("\n\n");
 }
 
-foreach (var numClients in new[] { 100, 500, 1000, 2500, 5000, 10000 })
+var cmd = Environment.GetCommandLineArgs().ToArray();
+var baseUrl = "https://raa-url-short.azurewebsites.net";
+if (cmd.Length >= 2)
 {
-    await RunSimulation(numClients);
+    baseUrl = cmd[1];
+}
+
+Console.WriteLine($"BaseUrl: {baseUrl}");
+
+foreach (var numClients in new[] { 1, 10, 100, 500 }) //  100, 500, 1000, 2500, 5000, 10000 })
+{
+    await RunSimulation(numClients, baseUrl);
 }
 
 

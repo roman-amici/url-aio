@@ -4,28 +4,56 @@ using UrlShortServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var dbType = builder.Configuration.GetValue<string>("DbType")?.ToLowerInvariant();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<UrlDbContext>(options =>
+
+if (dbType == "inmemory")
 {
-    //options.UseNpgsql("Host=localhost; Database=urlshort; Username=db_user; Password=admin;Maximum Pool Size=1024");
-    options.UseSqlite("Data Source=url.db");
-});
+    builder.Services.AddSingleton<IShortenerService, InMemoryShortenerService>();
+}
+else
+{
+    builder.Services.AddDbContext<UrlDbContext>(options =>
+    {
+
+        var connectionString = builder.Configuration.GetValue<string>("DbConnectionString");
+
+        if (dbType == "postgres")
+        {
+            options.UseNpgsql(connectionString);
+        }
+        else if (dbType == "sqlite")
+        {
+            options.UseSqlite(connectionString);
+        }
+    });
+
+    builder.Services.AddSingleton<IShortUrlService, RandomShortUrlService>();
+
+}
+
+var cacheType = builder.Configuration.GetValue<string>("CacheType")?.ToLowerInvariant();
+
+if (cacheType == "inmemory")
+{
+    builder.Services.AddSingleton<ICacheService, InMemoryCacheService>();
+}
+else
+{
+    builder.Services.AddSingleton<ICacheService, NullCacheService>();
+}
+
 builder.Services.AddScoped<IShortenerService, ShortenerService>();
-//builder.Services.AddSingleton<IShortenerService, InMemoryShortenerService>();
-builder.Services.AddSingleton<ICacheService, InMemoryCacheService>();
-builder.Services.AddSingleton<IShortUrlService, RandomShortUrlService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseSwagger();
-app.UseSwaggerUI();
+// app.UseSwagger();
+// app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

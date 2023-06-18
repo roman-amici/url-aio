@@ -51,14 +51,36 @@ namespace UrlShortClient
             HttpClient = new HttpClient(handler);
         }
 
-        public static async Task Reset(string baseUrl)
+        public static async Task<ConfigurationResponse?> Describe(string baseUrl, HttpClient client)
         {
-            using var client = new HttpClient();
+            var response = await client.GetAsync($"{baseUrl}/short/table");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Failed to get description");
+            }
+
+            return await response.Content.ReadFromJsonAsync<ConfigurationResponse>();
+
+        }
+
+        public static async Task Reset(string baseUrl, HttpClient client)
+        {
             var response = await client.DeleteAsync($"{baseUrl}/short");
 
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Failed to delete database");
+            }
+        }
+
+        public static async Task EnsureCreated(string baseUrl, HttpClient client)
+        {
+            var response = await client.PostAsync($"{baseUrl}/short/table", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Failed to create database");
             }
         }
 

@@ -13,10 +13,13 @@ namespace UrlShortServer.Controllers
         IShortenerService ShortenerService { get; set; }
         UrlDbContext Db { get; set; }
 
-        public ShortController(IShortenerService service, UrlDbContext db)
+        IConfiguration Config { get; set; }
+
+        public ShortController(IShortenerService service, UrlDbContext db, IConfiguration config)
         {
             ShortenerService = service;
             Db = db;
+            Config = config;
         }
 
         [HttpGet("{shortUrl}")]
@@ -67,6 +70,17 @@ namespace UrlShortServer.Controllers
         public Task Post()
         {
             return Db.Database.EnsureCreatedAsync();
+        }
+
+        [HttpGet("table")]
+        public ConfigurationResponse Get()
+        {
+            return new ConfigurationResponse()
+            {
+                CacheType = Config.GetValue<string>("CacheType"),
+                DatabaseType = Config.GetValue<string>("DbType"),
+                ServerString = Config.GetValue<string>("ServerString")
+            };
         }
 
     }
