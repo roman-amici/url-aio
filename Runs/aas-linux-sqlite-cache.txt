@@ -1,0 +1,75 @@
+----- Basic (B1) -----
+
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 9.483333333333333
+Failure Percentage 0
+Average 37.6556 ms
+p50 34.2921 ms
+p99 112.5843 ms
+
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 76.71666666666667
+Failure Percentage 0
+Average 45.863 ms
+p50 37.182 ms
+p99 187.402 ms
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 128.41666666666666
+Failure Percentage 0
+Average 432.6844 ms
+p50 301.8005 ms
+p99 2139.994 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 106.18333333333334
+Failure Percentage 0
+Average 4010.3777 ms
+p50 3379.4344 ms
+p99 19395.8852 ms
+
+---- Basic (B4) -----
+
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 9.666666666666666
+Failure Percentage 0
+Average 34.8503 ms
+p50 33.8116 ms
+p99 48.2572 ms
+
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 77.83333333333333
+Failure Percentage 0
+Average 40.4094 ms
+p50 35.3702 ms
+p99 158.1727 ms
+
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 148.1
+Failure Percentage 0
+Average 425.0142 ms
+p50 334.3813 ms
+p99 1460.6875 ms
+
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 125.16666666666667
+Failure Percentage 0
+Average 2454.691 ms
+p50 1859.9166 ms
+p99 17101.8129 ms
