@@ -1,0 +1,247 @@
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (1) Linux;Db=AZ Postgres S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 64.98333333333333
+Failure Percentage 0
+Average 88.0885 ms
+p50 68.3866 ms
+p99 370.7477 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (1) Linux;Db=AZ Postgres S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 112.03333333333333
+Failure Percentage 0
+Average 753.663 ms
+p50 643.6148 ms
+p99 2906.0426 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (1) Linux;Db=AZ Postgres S8
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 127.83333333333333
+Failure Percentage 0
+Average 1709.6995 ms
+p50 1439.3538 ms
+p99 6894.1096 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (1) Linux;Db=AZ Postgres S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 110.11666666666666
+Failure Percentage 0
+Average 4148.7721 ms
+p50 2663.8467 ms
+p99 28466.3719 ms
+
+--- Scale Out ----
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (2) Linux;Db=AZ Postgres S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 58.96666666666667
+Failure Percentage 0
+Average 100.5442 ms
+p50 53.4705 ms
+p99 493.0031 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (2) Linux;Db=AZ Postgres S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 226.96666666666667
+Failure Percentage 0
+Average 345.2401 ms
+p50 261.2689 ms
+p99 1191.0598 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (2) Linux;Db=AZ Postgres S8
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 348.6666666666667
+Failure Percentage 0
+Average 586.6219 ms
+p50 513.8655 ms
+p99 1792.6514 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS B1 (2) Linux;Db=AZ Postgres S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 266.73333333333335
+Failure Percentage 0
+Average 1542.305 ms
+p50 959.9409 ms
+p99 9796.679 ms
+
+--- Scale Up (but scale in also) ----
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (1) Linux;Db=AZ Postgres S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 75.13333333333334
+Failure Percentage 0
+Average 69.1137 ms
+p50 55.3612 ms
+p99 229.2987 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (1) Linux;Db=AZ Postgres S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 161.45
+Failure Percentage 0
+Average 503.0832 ms
+p50 419.9537 ms
+p99 2278.2957 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (1) Linux;Db=AZ Postgres S8
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 156.26666666666668
+Failure Percentage 0
+Average 1403.0898 ms
+p50 1146.761 ms
+p99 4492.2478 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (1) Linux;Db=AZ Postgres S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 115.06666666666666
+Failure Percentage 0
+Average 2614.4589 ms
+p50 1876.187 ms
+p99 23147.6944 ms
+
+--- Scale Up ----
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (2) Linux;Db=AZ Postgres S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 65.08333333333333
+Failure Percentage 0
+Average 85.6326 ms
+p50 67.2239 ms
+p99 253.9057 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (2) Linux;Db=AZ Postgres S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 185.78333333333333
+Failure Percentage 0
+Average 403.4588 ms
+p50 101.0653 ms
+p99 2011.0581 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (2) Linux;Db=AZ Postgres S8
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 253.7
+Failure Percentage 0
+Average 843.6833 ms
+p50 244.7581 ms
+p99 5267.3677 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (2) Linux;Db=AZ Postgres S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 245.01666666666668
+Failure Percentage 0
+Average 1850.5819 ms
+p50 506.9809 ms
+p99 13768.5266 ms
+
+---- Scale Up ----
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (4) Linux;Db=AZ Postgres S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 78.78333333333333
+Failure Percentage 0
+Average 63.4828 ms
+p50 47.1432 ms
+p99 171.9627 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (4) Linux;Db=AZ Postgres S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 354.25
+Failure Percentage 0
+Average 194.4947 ms
+p50 92.9799 ms
+p99 1034.597 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (4) Linux;Db=AZ Postgres S8
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 611.75
+Failure Percentage 0
+Average 317.6963 ms
+p50 270.1345 ms
+p99 822.6036 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AAS S1 (4) Linux;Db=AZ Postgres S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 608.5333333333333
+Failure Percentage 0
+Average 707.853 ms
+p50 462.2409 ms
+p99 4114.0152 ms

@@ -1,0 +1,59 @@
+Database: Postgres
+Cache: None
+ServerString : Web=Localhost;DB=B2
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 10.016666666666667
+Failure Percentage 0
+Average 37.051 ms
+p50 33.2199 ms
+p99 147.3374 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=Localhost;DB=B2
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 95.71666666666667
+Failure Percentage 0
+Average 41.9616 ms
+p50 34.6578 ms
+p99 235.5656 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=Localhost;DB=B2
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 338.46666666666664
+Failure Percentage 0
+Average 200.2184 ms
+p50 39.4296 ms
+p99 7731.0114 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=Localhost;DB=B2
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 44.266666666666666
+Failure Percentage 0
+Average 268.774 ms
+p50 41.0323 ms
+p99 10115.9787 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=Localhost;DB=AZ S8
+NumClients: 750
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 689.45
+Failure Percentage 0
+Average 293.323 ms
+p50 42.3452 ms
+p99 14252.5048 ms

@@ -1,0 +1,48 @@
+Database: Sqlite
+Cache: None
+ServerString : AAS B1 (1) Linux
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 7.566666666666666
+Failure Percentage 0
+Average 56.1017 ms
+p50 42.9622 ms
+p99 171.8229 ms
+
+Database: Sqlite
+Cache: None
+ServerString : AAS B1 (1) Linux
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 43.666666666666664
+Failure Percentage 0
+Average 110.5916 ms
+p50 75.0219 ms
+p99 491.241 ms
+
+Database: Sqlite
+Cache: None
+ServerString : AAS B1 (1) Linux
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 47.233333333333334
+Failure Percentage 0
+Average 750.6195 ms
+p50 664.7171 ms
+p99 2255.9193 ms
+
+Database: Sqlite
+Cache: None
+ServerString : AAS B1 (1) Linux
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 40.78333333333333
+Failure Percentage 0
+Average 4754.278 ms
+p50 4090.5598 ms
+p99 18119.4226 ms
+
