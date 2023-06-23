@@ -31,8 +31,7 @@ else
         }
     });
 
-    builder.Services.AddSingleton<IShortUrlService, RandomShortUrlService>();
-
+    builder.Services.AddScoped<IShortenerService, ShortenerService>();
 }
 
 var cacheType = builder.Configuration.GetValue<string>("CacheType")?.ToLowerInvariant();
@@ -46,7 +45,7 @@ else
     builder.Services.AddSingleton<ICacheService, NullCacheService>();
 }
 
-builder.Services.AddScoped<IShortenerService, ShortenerService>();
+builder.Services.AddSingleton<IShortUrlService, RandomShortUrlService>();
 
 var app = builder.Build();
 

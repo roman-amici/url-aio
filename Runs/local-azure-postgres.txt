@@ -45,15 +45,3 @@ Failure Percentage 0
 Average 268.774 ms
 p50 41.0323 ms
 p99 10115.9787 ms
-
-Database: Postgres
-Cache: None
-ServerString : Web=Localhost;DB=AZ S8
-NumClients: 750
-Read-Write-Delete: 100-10-1
-Duration: 60
-Reads/s 689.45
-Failure Percentage 0
-Average 293.323 ms
-p50 42.3452 ms
-p99 14252.5048 ms

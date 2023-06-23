@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UrlShortShared\UrlShortShared.csproj" />
+    <ProjectReference Include="..\UrlShortEf\UrlShortEf.csproj" />
   </ItemGroup>
 
 </Project>
