@@ -66,4 +66,9 @@ public class InMemoryShortenerService : IShortenerService
         return Task.FromResult(longUrl);
 
     }
+
+    public Task EnsureCreated()
+    {
+        return Task.CompletedTask;
+    }
 }

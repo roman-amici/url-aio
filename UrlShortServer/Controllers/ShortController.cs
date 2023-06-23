@@ -11,14 +11,12 @@ namespace UrlShortServer.Controllers
     {
 
         IShortenerService ShortenerService { get; set; }
-        UrlDbContext Db { get; set; }
 
         IConfiguration Config { get; set; }
 
-        public ShortController(IShortenerService service, UrlDbContext db, IConfiguration config)
+        public ShortController(IShortenerService service, IConfiguration config)
         {
             ShortenerService = service;
-            Db = db;
             Config = config;
         }
 
@@ -61,19 +59,19 @@ namespace UrlShortServer.Controllers
         }
 
         [HttpDelete]
-        public async Task Delete()
+        public async Task DeleteAllUrls()
         {
             await ShortenerService.DeleteAllUrls();
         }
 
         [HttpPost("table")]
-        public Task Post()
+        public Task EnsureCreated()
         {
-            return Db.Database.EnsureCreatedAsync();
+            return ShortenerService.EnsureCreated();
         }
 
         [HttpGet("table")]
-        public ConfigurationResponse Get()
+        public ConfigurationResponse GetConfiguration()
         {
             return new ConfigurationResponse()
             {

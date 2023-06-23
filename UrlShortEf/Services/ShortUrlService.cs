@@ -1,7 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authentication;
-
-namespace UrlShortServer.Services
+﻿namespace UrlShortServer.Services
 {
     public interface IShortUrlService
     {
@@ -17,7 +14,10 @@ namespace UrlShortServer.Services
 
             var bytes1 = BitConverter.GetBytes(i1);
 
-            return Task.FromResult( Base64UrlTextEncoder.Encode(bytes1) );
+            var baseString = Convert.ToBase64String(bytes1);
+
+
+            return Task.FromResult(baseString.TrimEnd('=').Replace('+', '-').Replace('/', '_'));
         }
     }
 }

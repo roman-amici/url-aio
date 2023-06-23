@@ -1,0 +1,73 @@
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 15.033333333333333
+Failure Percentage 0
+Average 7.7513 ms
+p50 7.3173 ms
+p99 9.9772 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 151.08333333333334
+Failure Percentage 0
+Average 7.92 ms
+p50 7.365 ms
+p99 36.8213 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1071.4166666666667
+Failure Percentage 0
+Average 32.5788 ms
+p50 29.4917 ms
+p99 81.062 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1527.65
+Failure Percentage 0
+Average 95.2041 ms
+p50 89.1811 ms
+p99 164.0734 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1382.8
+Failure Percentage 0
+Average 271.7848 ms
+p50 278.7768 ms
+p99 430.4528 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1202.4666666666667
+Failure Percentage 0
+Average 701.1139 ms
+p50 690.0141 ms
+p99 1085.1022 ms
+
+

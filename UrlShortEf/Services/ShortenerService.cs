@@ -13,6 +13,8 @@ namespace UrlShortServer.Services
         Task DeleteAllUrls();
 
         Task<bool> DeleteUrl(string shortUrl);
+
+        Task EnsureCreated();
     }
 
     public class ShortenerService : IShortenerService
@@ -113,6 +115,11 @@ namespace UrlShortServer.Services
             }
 
             return entry?.LongUrl;
+        }
+
+        public Task EnsureCreated()
+        {
+            return db.Database.EnsureCreatedAsync();
         }
     }
 }

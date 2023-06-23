@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrlShortClient", "UrlShortC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortShared", "UrlShortShared\UrlShortShared.csproj", "{3029892B-775D-4A89-AD08-A6B6622C493A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortAzfn", "UrlShortAzfn\UrlShortAzfn.csproj", "{DD7DBAD6-4A5A-4BC7-9558-1EC8D1F28231}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3029892B-775D-4A89-AD08-A6B6622C493A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3029892B-775D-4A89-AD08-A6B6622C493A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3029892B-775D-4A89-AD08-A6B6622C493A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD7DBAD6-4A5A-4BC7-9558-1EC8D1F28231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7DBAD6-4A5A-4BC7-9558-1EC8D1F28231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7DBAD6-4A5A-4BC7-9558-1EC8D1F28231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7DBAD6-4A5A-4BC7-9558-1EC8D1F28231}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
