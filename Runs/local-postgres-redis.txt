@@ -1,0 +1,83 @@
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 173
+Failure Percentage 0
+Average 0.5901 ms
+p50 0.5815 ms
+p99 0.8625 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1728
+Failure Percentage 0
+Average 0.7165 ms
+p50 0.61 ms
+p99 5.5218 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 4229.183333333333
+Failure Percentage 0
+Average 1.9161 ms
+p50 0.9888 ms
+p99 8.366 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 8126.683333333333
+Failure Percentage 0
+Average 3.6669 ms
+p50 2.7583 ms
+p99 20.0385 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 14645.25
+Failure Percentage 0
+Average 7.8397 ms
+p50 5.7099 ms
+p99 36.1794 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 2500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 14118.95
+Failure Percentage 0
+Average 74.948 ms
+p50 55.707 ms
+p99 292.3891 ms
+
+Database: Postgres
+Cache: Redis
+ServerString : Web=Localhost;DB=Postgres Local;Cache=Redis Local
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 8960.75
+Failure Percentage 0
+Average 362.3119 ms
+p50 312.0275 ms
+p99 1737.6816 ms

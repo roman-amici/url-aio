@@ -1,0 +1,71 @@
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 83.08333333333333
+Failure Percentage 0
+Average 58.265 ms
+p50 54.028 ms
+p99 92.7467 ms
+
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 374.1
+Failure Percentage 0
+Average 201.4926 ms
+p50 152.9158 ms
+p99 545.3434 ms
+
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 250
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 725.2
+Failure Percentage 0
+Average 272.5746 ms
+p50 274.5835 ms
+p99 595.7713 ms
+
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1306.0833333333333
+Failure Percentage 0
+Average 300.1565 ms
+p50 304.4815 ms
+p99 600.5927 ms
+
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 2340.116666666667
+Failure Percentage 0
+Average 336.565 ms
+p50 322.9558 ms
+p99 608.9989 ms
+
+Database: Cosmos
+Cache: None
+ServerString : Web=Localhost;DB=Cosmos Auto
+NumClients: 2500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 2597.2
+Failure Percentage 0
+Average 803.203 ms
+p50 538.1155 ms
+p99 6450.9101 ms
