@@ -11,6 +11,7 @@ using UrlShortServer.Services;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using UrlShortServer.Transport;
+using Microsoft.Extensions.Configuration;
 
 [assembly: FunctionsStartup(typeof(UrlShort.AzFn.Startup))]
 
@@ -21,9 +22,10 @@ namespace UrlShort.AzFn
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            var config = builder.GetContext().Configuration;
             builder.Services.AddDbContext<UrlDbContext>(options =>
             {
-                options.UseNpgsql("Host=localhost; Database=urlshort; Username=db_user; Password=admin;Maximum Pool Size=1024");
+                options.UseNpgsql(config["DbConnectionString"]);
             });
             builder.Services.AddSingleton<ICacheService, NullCacheService>();
             builder.Services.AddScoped<IShortenerService, ShortenerService>();
@@ -34,15 +36,17 @@ namespace UrlShort.AzFn
     public class UrlShortTrigger
     {
         private IShortenerService ShortenerService { get; set; }
+        private string ServerString { get; set; }
 
-        public UrlShortTrigger(IShortenerService db)
+        public UrlShortTrigger(IShortenerService db, IConfiguration config)
         {
             ShortenerService = db;
+            ServerString = config["ServerString"];
         }
 
         [FunctionName("AddUrl")]
         public async Task<IActionResult> AddUrl(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "Short")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Short")] HttpRequest req)
         {
             var jsonString = await req.ReadAsStringAsync();
             var x = JsonConvert.DeserializeObject<ShortenerRequest>(jsonString);
@@ -54,7 +58,7 @@ namespace UrlShort.AzFn
 
         [FunctionName("GetLongUrl")]
         public async Task<IActionResult> GetLongUrl(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Short/{shortUrl}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Short/{shortUrl}")] HttpRequest req,
             string shortUrl)
         {
             var longUrl = await ShortenerService.GetLongUrl(shortUrl);
@@ -71,7 +75,7 @@ namespace UrlShort.AzFn
 
         [FunctionName("DeleteEntry")]
         public async Task<IActionResult> DeleteEntry(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "Short/{shortUrl}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Short/{shortUrl}")] HttpRequest req,
             string shortUrl)
         {
             var result = await ShortenerService.DeleteUrl(shortUrl);
@@ -89,7 +93,7 @@ namespace UrlShort.AzFn
 
         [FunctionName("EnsureCreated")]
         public async Task<IActionResult> EnsureCreated(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "Short/table")] HttpRequest req
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Short/table")] HttpRequest req
         )
         {
             await ShortenerService.EnsureCreated();
@@ -98,7 +102,7 @@ namespace UrlShort.AzFn
 
         [FunctionName("DeleteAllUrls")]
         public async Task<IActionResult> DeleteAllUrls(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "Short")] HttpRequest req
+            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Short")] HttpRequest req
         )
         {
             await ShortenerService.DeleteAllUrls();
@@ -107,14 +111,14 @@ namespace UrlShort.AzFn
 
         [FunctionName("GetConfiguration")]
         public async Task<IActionResult> GetConfiguration(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Short/table")] HttpRequest req
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Short/table")] HttpRequest req
         )
         {
             var configResponse = new ConfigurationResponse()
             {
                 CacheType = "None",
                 DatabaseType = "Postgres",
-                ServerString = "Web=AzFn Local;Db=Local"
+                ServerString = ServerString
             };
 
             return new OkObjectResult(configResponse);

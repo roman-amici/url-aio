@@ -150,7 +150,7 @@ if (cmd.Length >= 2)
 
 Console.WriteLine($"BaseUrl: {baseUrl}");
 
-foreach (var numClients in new[] { 100, 250, 500, 1000 }) //  100, 500, 1000, 2500, 5000, 10000 })
+foreach (var numClients in new[] { 10, 100, 250, 500, 1000 }) //  100, 500, 1000, 2500, 5000, 10000 })
 {
     await RunSimulation(numClients, baseUrl);
 }

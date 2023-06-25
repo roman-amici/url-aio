@@ -1,0 +1,97 @@
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 1
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 9.133333333333333
+Failure Percentage 0
+Average 46.7663 ms
+p50 42.6633 ms
+p99 154.9205 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 10
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 90.88333333333334
+Failure Percentage 0
+Average 48.6458 ms
+p50 43.6749 ms
+p99 164.7861 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 100
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 705.1
+Failure Percentage 0
+Average 75.5021 ms
+p50 51.4015 ms
+p99 256.8229 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 200
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 915.7333333333333
+Failure Percentage 0
+Average 142.7139 ms
+p50 112.0743 ms
+p99 479.2353 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 1769.1
+Failure Percentage 0
+Average 200.1625 ms
+p50 136.7101 ms
+p99 1297.0945 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 1000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 2515.5666666666666
+Failure Percentage 0
+Average 294.6953 ms
+p50 170.1279 ms
+p99 737.7733 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn;Db=AZ S8
+NumClients: 2500
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 3341.05
+Failure Percentage 0
+Average 539.5168 ms
+p50 143.5192 ms
+p99 1338.2497 ms
+
+Database: Postgres
+Cache: None
+ServerString : Web=AzFn Local;Db=Local
+NumClients: 5000
+Read-Write-Delete: 100-10-1
+Duration: 60
+Reads/s 3586.116666666667
+Failure Percentage 0
+Average 285.3268 ms
+p50 152.319 ms
+p99 1614.5394 ms
+
+
